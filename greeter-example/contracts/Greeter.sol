@@ -4,8 +4,7 @@ pragma solidity ^0.8.0;
 contract Greeter {
     string private greeting;
 
-
-    constructor(string memory _greeting){
+    constructor(string memory _greeting) {
         greeting = _greeting;
     }
 
@@ -15,5 +14,5 @@ contract Greeter {
 
     function setGreeting(string memory _greeting) public {
         greeting = _greeting;
-    }    
+    }
 }

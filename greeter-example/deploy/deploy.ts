@@ -5,16 +5,13 @@ import { Deployer } from "@matterlabs/hardhat-zksync-deploy";
 
 require('dotenv').config()
 
-let PKEY = process.env.PKEY
-
 // An example of a deploy script that will deploy and call a simple contract.
 export default async function (hre: HardhatRuntimeEnvironment) {
-    console.log(`Running deploy script for the Greeter contract`);
-
+  console.log(`Running deploy script for the Greeter contract`);
 
   // Initialize the wallet.
   const provider = new Provider(hre.userConfig.zkSyncDeploy?.zkSyncNetwork);
-  const wallet = new Wallet(`${PKEY}`);
+  const wallet = new Wallet(`${process.env.PKEY}`);
 
   // Create deployer object and load the artifact of the contract you want to deploy.
   const deployer = new Deployer(hre, wallet);
@@ -24,15 +21,14 @@ export default async function (hre: HardhatRuntimeEnvironment) {
   const greeting = "Hi there!";
   const deploymentFee = await deployer.estimateDeployFee(artifact, [greeting]);
 
-    // Deposit funds to L2
-    const depositHandle = await deployer.zkWallet.deposit({
-        to: deployer.zkWallet.address,
-        token: utils.ETH_ADDRESS,
-        amount: deploymentFee.mul(2),
-    });
-    // Wait until the deposit is processed on zkSync
-    await depositHandle.wait();
-
+  // Deposit funds to L2
+  const depositHandle = await deployer.zkWallet.deposit({
+    to: deployer.zkWallet.address,
+    token: utils.ETH_ADDRESS,
+    amount: deploymentFee.mul(2),
+  });
+  // Wait until the deposit is processed on zkSync
+  await depositHandle.wait();
 
   // Deploy this contract. The returned object will be of a `Contract` type, similarly to ones in `ethers`.
   // `greeting` is an argument for contract constructor.
@@ -40,7 +36,6 @@ export default async function (hre: HardhatRuntimeEnvironment) {
   console.log(`The deployment is estimated to cost ${parsedFee} ETH`);
 
   const greeterContract = await deployer.deploy(artifact, [greeting]);
-
 
   //obtain the Constructor Arguments
   console.log("constructor args:" + greeterContract.interface.encodeDeploy([greeting]));

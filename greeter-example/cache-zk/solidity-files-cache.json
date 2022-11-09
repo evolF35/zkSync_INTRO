@@ -2,8 +2,8 @@
   "_format": "hh-sol-cache-2",
   "files": {
     "/Users/macbookair/Desktop/zkSync_INTRO/greeter-example/contracts/Greeter.sol": {
-      "lastModificationDate": 1668003744202,
-      "contentHash": "d1a7d02ca6667be99618479a8fc3ccfc",
+      "lastModificationDate": 1668005184788,
+      "contentHash": "50dc274033bbebf641452b3939f75dea",
       "sourceName": "contracts/Greeter.sol",
       "solcConfig": {
         "version": "0.8.16",
